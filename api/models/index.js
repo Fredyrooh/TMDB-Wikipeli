@@ -1,7 +1,18 @@
 const Users = require("./Users")
-const WatchList = require("./WatchList")
+// const WatchList = require("./WatchList")
 
-Users.hasMany(WatchList)
-WatchList.hasOne(Users)
+// Users.hasOne(WatchList,{ through: 'watchlist', as: 'favorite'})
+// WatchList.hasOne(Users, { through: 'watchlist', as: 'favorite'})
 
-module.exports = {Users , WatchList} 
+// Users.belongsToMany(Users, { 
+//     as: 'friends',
+//     foreignKey: 'user_id',
+//     through: "UsersFriends"
+//   });
+//   Users.belongsToMany(Users, { 
+//     as: 'userFriends',
+//     foreignKey: 'friend_id',
+//     through: "UsersFriends"
+//   });
+
+module.exports = {Users } 

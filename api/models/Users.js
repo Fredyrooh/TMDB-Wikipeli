@@ -8,11 +8,18 @@ User.init(
     {
     name : {
         type: S.STRING,
-        allowNull: false
+        allowNull: false,
+        unique:true
+    },
+    img:{
+        type:S.STRING
     },
     password : {
         type: S.STRING,
         allowNull: false,
+    },
+    fav: {
+        type:S.ARRAY(S.INTEGER)
     },
     salt : {
         type :S.STRING,

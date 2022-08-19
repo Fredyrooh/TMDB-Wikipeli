@@ -1,13 +1,24 @@
+const { UniqueConstraintError } = require("sequelize")
 const S = require("sequelize")
 const db = require("../config")
 
-class WatchList extends S.Model {}
+class WatchList extends S.Model { }
 
 WatchList.init({
-    nameMovie : {
-        type:S.STRING,
-        allowNull: false
+       idMovie : {
+        type:S.ARRAY(S.INTEGER),
+        allowNull: false,
+        unique: true
     },
-},{sequelize:db, modelName : "watchList"})
+        fav:{
+            type:S.BOOLEAN,
+            defaultValue:false
+        }
+}, { sequelize: db, modelName: "watchList" })
+
+
+
+
 
 module.exports = WatchList
+

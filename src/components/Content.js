@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import MovieBox from "../commons/MovieBox";
-import LogIn from './pages/LogIn';
-import Register from './pages/Register';
+import { sendPopularMovies } from '../store/movies';
 
 const Content = () => {
-    const API_URL = "https://api.themoviedb.org/3/movie/popular?api_key=3f8117490ee37e5c84303e9e7d0f467d"
-    const [movies, setMovies] = useState([])
+    const movies = useSelector(state=>state.movies)
+    const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetch(API_URL)
-            .then(res => res.json())
-            .then(data => {
-                console.log("*******data******", data);
-                setMovies(data.results)
-            })
-    }, [])
+    useEffect(() => { dispatch(sendPopularMovies()) }, [])
+
     return (
-        <section>
-            {movies.map((movie) =>
+        <div>
+        <section className='container'>
+            <div className='grid'>
+            {movies.map((movie,i) =>
                 <MovieBox key={movie.id} {...movie} />)}
+             </div>
         </section>
+      </div>  
     )
 }
 

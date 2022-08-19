@@ -11,7 +11,7 @@ const Sidebar = () => {
       <ul className="menu-list">
         {ejemplo.map((pelicula, i) => (
           <li key={i}>
-            <a>{pelicula}</a>
+            {pelicula}
             {/* {<Link to={`single/playlists/${playlist.id}`}>{playlist.name}</Link>} */}
           </li>
         ))}
@@ -20,7 +20,7 @@ const Sidebar = () => {
       <ul className="menu-list">
         {ejemplo2.map((serie, i) => (
           <li key={i}>
-            <a>{serie}</a>
+            {serie}
             {/* {<Link to={`single/artists/${artist.id}`}>{artist.name}</Link>} */}
           </li>
         ))}

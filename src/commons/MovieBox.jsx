@@ -1,12 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import "bootstrap"
+import {Modal,Button} from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { putFavotiteMovie } from "../store/user";
 
+const starFalse = require("../assets/1.png")
+const starTrue = require("../assets/2.png")
+
+// import Favorites from "../components/pages/Favorites";
 const API_IMG = "https://image.tmdb.org/t/p/w500"
-const MovieBox = ({title,poster_path,vote_average,release_date,overview})=>{
+
+
+const MovieBox = ({id,title ,poster_path ,vote_average ,release_date ,overview})=>{
+    const {user,movies,favorites} = useSelector(state=>state)
+    const {idMovie,fav} = favorites
+    const dispatch = useDispatch()
+        // console.log("||||||||||||||||||||||||",movies);
+
+    //logica para mostrar cards
+    const [show,setShow] = useState(false)
+    const handleShow = ()=> setShow(true)
+    const handleClose = ()=> setShow(false) 
+
+    //logica para elegir un favorito
+    const [star,setStar] = useState(false)
+
+    const handleTrue = ()=> setStar(true)
+    const handleFalse = ()=> setStar(false)
+    const handleFavorite =(e)=>{
+        // e.preventDefault()
+        //   if(!show){ 
+        // //   const obj = {idMovie:[id],fav:star}       
+        //   dispatch(putFavotiteMovie({id,user:user.id})) }
+    }
+
     return(
-        <div>
-            <h1>{title}</h1>
-            <img  src={API_IMG+poster_path} alt={title} height="300px"/>
-            <p>{overview}</p>
+        <div className="card text-center bg-secondary mb-3 ">
+            <div className="card-body">
+               <img alt="" className="card-img-top" src={API_IMG+poster_path}/>
+            <div className="card-body">
+               <button type="button" className="btn btn-dark" onClick={handleShow}>View More</button> 
+               <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    
+                   <img className="card-img-top" src={API_IMG+poster_path}/>
+                   <div onClick={handleFavorite}>
+
+      {/* esto es el boton y logica de favoritos... */}
+      {!star? <img src= {starFalse} width="40px" onClick={handleTrue}/>
+       : <img src={starTrue} width="40px" onClick={handleFalse}/>}</div> 
+
+                   {/* <Favorites id={id}/> */}
+                   <h3>{title}</h3> 
+                   <h4>IMDB: {vote_average}</h4>    
+                   <h5>Release Date: {release_date}</h5>
+                   <br />
+                   <h6>Overview</h6>
+                   <p>{overview}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>Close</Button>
+
+                </Modal.Footer>
+               </Modal>
+            </div>
+             </div> 
         </div>
     )
 }
