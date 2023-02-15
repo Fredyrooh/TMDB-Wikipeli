@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "bootstrap"
 import {Modal,Button} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { putFavotiteMovie } from "../store/user";
+import axios from "axios";
+// import { putFavotiteMovie } from "../store/user";
 
 const starFalse = require("../assets/1.png")
 const starTrue = require("../assets/2.png")
@@ -15,7 +16,6 @@ const MovieBox = ({id,title ,poster_path ,vote_average ,release_date ,overview})
     const {user,movies,favorites} = useSelector(state=>state)
     const {idMovie,fav} = favorites
     const dispatch = useDispatch()
-        // console.log("||||||||||||||||||||||||",movies);
 
     //logica para mostrar cards
     const [show,setShow] = useState(false)
@@ -25,7 +25,10 @@ const MovieBox = ({id,title ,poster_path ,vote_average ,release_date ,overview})
     //logica para elegir un favorito
     const [star,setStar] = useState(false)
 
-    const handleTrue = ()=> setStar(true)
+    const handleTrue = ()=> {
+        setStar(true)
+        axios.post(`/api/watchlist/create/${id}`)
+    }
     const handleFalse = ()=> setStar(false)
     const handleFavorite =(e)=>{
         // e.preventDefault()
@@ -38,6 +41,7 @@ const MovieBox = ({id,title ,poster_path ,vote_average ,release_date ,overview})
         <div className="card text-center bg-secondary mb-3 ">
             <div className="card-body">
                <img alt="" className="card-img-top" src={API_IMG+poster_path}/>
+               console.log();
             <div className="card-body">
                <button type="button" className="btn btn-dark" onClick={handleShow}>View More</button> 
                <Modal show={show} onHide={handleClose}>

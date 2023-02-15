@@ -1,9 +1,9 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const sendRegisterUser = createAsyncThunk("REGISTER", (register) => {
-  return axios.post("api/users/register/", register)
-    .then(r => r.data)
+export const sendRegisterUser = createAsyncThunk("REGISTER", async (register) => {
+  const r = await axios.post("/api/users/register", register);
+  return r.data;
 });
 
 export const sendLoginRequest = createAsyncThunk(
@@ -13,12 +13,13 @@ export const sendLoginRequest = createAsyncThunk(
       .then((r) => r.data)
   })
 
-export const getValidateAuth = createAsyncThunk("LOGOUT", (user) => {
-  return axios.get("api/users/me",user).then(r => r.data)
+export const getValidateAuth = createAsyncThunk("LOGOUT", async (user) => {
+  const r = await axios.get("api/users/me", user);
+  return r.data;
 })
 
 export const logoutRequest = createAsyncThunk("LOGOUT", () => {
-  return axios.post("api/users/logout").then(r => console.log("adios desde el store"))
+  return axios.post("api/users/logout").then(r => r.data)
 })
 
 export const getUserRequest = createAsyncThunk("USER", () => {

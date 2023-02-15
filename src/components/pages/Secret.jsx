@@ -10,8 +10,9 @@ export default () => {
     return (
       <div>
         <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-         bienvenido{user.name}!
+         bienvenido {user.name}!
         </h2>
+        <h3>Aqui veras tus Peliculas Favoritas cuando las tengas</h3>
         <p className="m-0 text-center text-m leading-9 text-gray-900">
           Your Email : {user.email}
         </p>

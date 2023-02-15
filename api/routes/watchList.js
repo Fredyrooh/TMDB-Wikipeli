@@ -8,17 +8,18 @@ router.get("/",(req,res,next)=>{
     .catch(next)
 })
 
-/*  let idMovie = []
+   let idMovie = []
     const pushFavorites = (movie)=>{
         dispatch(getFavoritesRequest())
         .then(arr=>arr.array.forEach(e=>idMovie.push(e)))
         idMovie.push(movie)
         return {idMovie,fav:true}
-    }*/
+    }
 
-router.post("/",(req,res)=>{
-    const body = {idMovie:[req.body.id],fav:true}  
-
+router.post("/create/:idMovie/:userId",(req,res)=>{
+    const movie = req.params.idMovie
+    const user = req.params.userId
+    const body = {idMovie:movie,userId:user} 
   WatchList.create(body)
     .then((fav) => res.status(201).send(fav)
     .then(console.log("favorito creado con exito",)))
@@ -34,5 +35,10 @@ router.put("/", (req, res) => {
     .catch(() => res.status(500).send("Already added"));
 }); 
 
+router.delete('/delete/:id',(req,res)=>{
+    const id = req.params.id
+    WatchList.destroy({where:{idMovie}})
+    res.status(200).send("Se elimino la pelicula de favoritos")
+})
 
 module.exports = router

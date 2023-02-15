@@ -21,7 +21,7 @@ const App = () => {
   //validacion de usuario para mantener sesion
   useEffect(() => {
     dispatch(getValidateAuth(user))
-      .then(() => console.log("user validate.. ok", user.name))
+      .then(() => user.name?console.log("user validate.. ok", user.name):false)
       .catch(err => alert("error en app use effect", err))
   }, [])
 

@@ -1,5 +1,5 @@
 const Users = require("./Users")
-// const WatchList = require("./WatchList")
+const WatchList = require("./WatchList")
 
 // Users.hasOne(WatchList,{ through: 'watchlist', as: 'favorite'})
 // WatchList.hasOne(Users, { through: 'watchlist', as: 'favorite'})
@@ -15,4 +15,4 @@ const Users = require("./Users")
 //     through: "UsersFriends"
 //   });
 
-module.exports = {Users } 
+module.exports = {Users, WatchList } 

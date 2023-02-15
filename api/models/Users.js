@@ -37,9 +37,9 @@ User.prototype.genHash = function(pass,sl){         //Metodo para crear el hash 
     return bcrypt.hash(pass,sl)
 }
 
-User.prototype.validatePassword = function (pass){
-    return this.genHash(pass,this.salt)
-    .then((newHash)=>newHash === this.password)
+User.prototype.validatePassword = async function (pass){
+    const newHash = await this.genHash(pass, this.salt)
+    return newHash === this.password
 }
 
 User.addHook("beforeCreate",function (user){        // Hook que antes de crear el user crea una salt para poder igualaar el hash creado 

@@ -8,26 +8,18 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
-  console.log("**name***", register);
-
   const handleChangeRegister = (e) => {
     setRegister(
-      {
-        ...register,
-        [e.target.name]: e.target.value,
-        [e.target.email]: e.target.value,
-        [e.target.password]: e.target.value,
-      },
-      {}
+      {...register,
+        [e.target.name ]: e.target.value
+      },{}
     );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(sendRegisterUser({...register}))
-      .then(() => alert("usuario creado"))
-      .then(() => navigate("/"))
-      .catch((err) => alert("no se pudo crear el usuario",err));
+    .then(()=>navigate('/'))
   };
 
   return (
